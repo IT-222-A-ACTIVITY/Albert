@@ -1,0 +1,54 @@
+<?php
+
+class Time {
+    private $hours;
+    private $minutes;
+    private $seconds;
+
+    public function setTime($hours, $minutes, $seconds) {
+        $this->hours = $hours;
+        $this->minutes = $minutes;
+        $this->seconds = $seconds;
+    }
+
+    public function addTime($hours, $minutes, $seconds) {
+        $this->hours += $hours;
+        $this->minutes += $minutes;
+        $this->seconds += $seconds;
+
+        
+        $this->normalizeTime();
+    }
+
+    public function subtractTime($hours, $minutes, $seconds) {
+        $this->hours -= $hours;
+        $this->minutes -= $minutes;
+        $this->seconds -= $seconds;
+
+        
+        $this->normalizeTime();
+    }
+
+    private function normalizeTime() {
+        $this->minutes += floor($this->seconds / 60);
+        $this->seconds %= 60;
+
+        $this->hours += floor($this->minutes / 60);
+        $this->minutes %= 60;
+    }
+
+    public function __toString() {
+        return sprintf("%02d:%02d:%02d", $this->hours, $this->minutes, $this->seconds);
+    }
+}
+
+$time = new Time();
+$time->setTime(10, 30, 45);
+echo "Initial time: $time \n";
+
+$time->addTime(2, 15, 2);
+echo "After adding time: $time \n" ;
+
+$time->subtractTime(0, 45, 10);
+echo "After subtracting time: $time";
+?>

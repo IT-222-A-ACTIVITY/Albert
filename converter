@@ -1,0 +1,19 @@
+<?php
+
+class Converter {
+    private $result;
+
+    public function meterToCm($meters)
+    {
+        $this->result = $meters * 100;
+    }
+
+    public function getResult() {
+        return $this->result;
+    }
+}
+
+$converter = new Converter();
+$converter->meterToCm(1);
+echo "If you convert 1 meter to Cm is " . $converter->getResult();
+?>
